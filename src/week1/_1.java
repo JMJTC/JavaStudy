@@ -11,6 +11,5 @@ public class _1 {
         long a=n/3,b=n/5,c=n/15;
         long sum=a*(a+1)/2*3+b*(b+1)/2*5-c*(c+1)/2*15;
         System.out.println(sum);
-
     }
 }
