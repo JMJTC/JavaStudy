@@ -19,13 +19,13 @@ public class _3 {
         long MAX=2;
         long i=1;
         for(;i<=n;i++){
-            if(n%i==0){
-                if(IsPrime(n/i)){
+            if(n%i==0){//判断是否是该数的因数，从小到大，
+                if(IsPrime(n/i)){//n/i即为当前的最大因数，判断其是否为素数
                     MAX=n/i;
                     break;
                 }
                 else{
-                    n=n/i;
+                    n=n/i;//n变为其最大的因数，该因数为一个合数
                     i=1;
                 }
             }

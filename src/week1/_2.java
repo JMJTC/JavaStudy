@@ -11,7 +11,7 @@ public class _2 {
         for(;first+second<=n;){
             temp=first+second;
             count++;
-            if(count%3==2){
+            if(count%3==2){//该值得相对位置确定
                 sum+=temp;
             }
             first=second;
