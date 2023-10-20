@@ -36,19 +36,19 @@ public class _5 {
                short i=0;
                while(data[i]==1){
                    i++;
-                   if(i==n){
+                   if(i==n){//最后一项也为1时跳出
                        test=false;
                        break;
                    }
                }
                if(test){
-                   miniprime=data[i];
+                   miniprime=data[i];//该数一定为质数
                }
 
 
             }
             else
-                prime[count_prime++]=miniprime;
+                prime[count_prime++]=miniprime;//记录质因数
         }
         long answer=1;
         for(int i=0;i<count_prime;i++){

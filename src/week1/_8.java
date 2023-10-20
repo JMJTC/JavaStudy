@@ -28,7 +28,7 @@ public class _8 {
             while(data[i].number!=1){
                 if(data[i].number%2==0){
                     data[i].number/=2;
-                    if(data[i].number<=i&&data[i].number!=1){
+                    if(data[i].number<=i&&data[i].number!=1){//当前数字小于等于i时，说明这个数的考兹拉序列已经算过，直接取结果跳出循环
                         data[i].count+=data[(int) (data[i].number-1)].count;
                         break;
                     }
