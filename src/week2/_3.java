@@ -21,6 +21,7 @@ public class _3 {
 
         //相当于在n+m个里面选n个,
         String answer=fact(n+m).divide(fact(n).multiply(fact(m))).toString() ;//阶乘导致数太大
+        //排列组合还有更优的算法，过后再实现
         System.out.println(answer);
 
     }
