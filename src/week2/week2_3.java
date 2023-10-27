@@ -3,7 +3,7 @@ package week2;
 import java.math.BigInteger;
 import java.util.Scanner;
 
-public class _3 {
+public class week2_3 {
     public static BigInteger fact(int n){
         BigInteger sum=new BigInteger("1");
         for(int i=1;i<=n;i++){

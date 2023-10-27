@@ -3,7 +3,7 @@ package week2;
 //import java.math.BigInteger;
 import java.util.Scanner;
 
-public class _2 {
+public class week2_2 {
     public static void main(String[] args){
         Scanner in=new Scanner(System.in);
         int len=in.nextInt();

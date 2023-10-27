@@ -5,7 +5,7 @@ import java.util.Scanner;
 import static java.lang.Math.pow;
 
 
-public class _1 {
+public class week2_1 {
     public static void main(String[] args){
         long square1=0L,square2=0L;
         int n;
