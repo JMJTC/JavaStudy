@@ -47,6 +47,11 @@ public class week2_5 {
 //        System.out.println(String.valueOf(temp));
 //    }
     //动态规划
+//假设要求从零到九的数构成的字符串S形成的字典排列中的第n位，记为lp(n,s)，字符串的长度为len(s)
+//设q=n/(len(s)−1)!, r=n%(len(s)−1)!
+//则我们可以将动态规划的状态转移方程表述为：
+//lp(n,s)={s[q]+lp(r,s[:q]+s[q+1:])  len(s)>1
+//s                                   len(s)=1
     public static String dictionary(int n,String data){
 
         if(data.length()>1){
@@ -88,6 +93,4 @@ public class week2_5 {
         }
 
     }
-
-
 }

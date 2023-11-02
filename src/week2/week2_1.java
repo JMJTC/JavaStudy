@@ -1,10 +1,7 @@
 package week2;
 
 import java.util.Scanner;
-
 import static java.lang.Math.pow;
-
-
 public class week2_1 {
     public static void main(String[] args){
         long square1=0L,square2=0L;
