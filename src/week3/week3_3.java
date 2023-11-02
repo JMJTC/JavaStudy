@@ -2,6 +2,9 @@ package week3;
 
 import java.util.Scanner;
 
+/**
+ * @author jmjtc
+ */
 public class week3_3 {
 //    public static int ysf(int n,int k){
 //        if(n==1){
