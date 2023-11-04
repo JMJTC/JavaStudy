@@ -6,6 +6,20 @@ import java.util.Scanner;
  * @author jmjtc
  */
 public class week3_4 {
+    //求最小公倍数,以知a和b两个数，最小公倍数 = （a*b）/ 最大公约数
+    //利用辗转相除法
+    public static int gcd(int a,int b){
+        if(b==0){
+            return a;
+        }
+        else{
+            return gcd(b,a%b);
+        }
+    }
+    public static int minMultiply(int a,int b){
+        int t=gcd(a,b);
+        return (a*b)/t;
+    }
     public static void main(String[] args){
         Scanner in=new Scanner(System.in);
         int n=in.nextInt(),m=in.nextInt();
@@ -13,12 +27,11 @@ public class week3_4 {
         for(int i=0;i<m;i++){
             data[i]=in.nextInt();
         }
-        //but这些数不一定为质数，需要先变为质数，或者用别的方法，这题提交后有一个WA
         int ans=0;//满足条件的个数
         //枚举区间是[1,2^m-1]，奇加偶减
         for(int i=1;i<(1<<m);i++)
         {
-            int t=1;     //选中集合对应质数的乘积
+            int t=1;     //选中集合对应数的最小公倍数
             int cnt=0;  //选中的集合数量
             //枚举当前状态的每一位
             for(int j=0;j<m;j++)    //判断这m个二进制位
@@ -33,7 +46,7 @@ public class week3_4 {
                         break;
                     }
                     cnt++;       //有一个1，集合数量+1
-                    t*=data[j];
+                    t=minMultiply(t,data[j]);
                 }
             }
             if(t==-1) {
