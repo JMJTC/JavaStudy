@@ -28,7 +28,7 @@ class Solution {
         }
         //边界情况需要再判断一次
         if(i==1){
-            return nums[i]>nums[i-1]?i:i-1;
+            return nums[i]>nums[i-1]?i: 0;
         }
         if(i==nums.length-2){
             return nums[i]>nums[i+1]?i:i+1;
