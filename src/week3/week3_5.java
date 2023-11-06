@@ -5,12 +5,7 @@ import java.util.Scanner;
 /**
  * @author jmjtc
  */
-//方一 暴力解法
-//每个物品取或不取，回溯算法枚举所有情况
-//时间复杂度 2^n
 
-//方二dp数组法
-//
 public class week3_5 {
     public static void main(String[] args){
         Scanner in=new Scanner(System.in);
