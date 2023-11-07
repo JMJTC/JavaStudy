@@ -27,6 +27,8 @@ class SolutionQuestion3 {
         while(left<=right){
             //向上取整
             int mid=(right+left)>>1;
+            //mid=(right+left)>>>1,规避整形溢出
+            //or  mid=(right-left>>1)+left
             if(target<=nums[mid]){
                 ans=mid;
                 right=mid-1;
