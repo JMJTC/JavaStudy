@@ -3,6 +3,9 @@ package week4;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author jmjtc
+ */
 public class week4_7 {
     public List<String> letterCasePermutation(String s) {
         int n = s.length();
@@ -27,3 +30,4 @@ public class week4_7 {
         return ans;
     }
 }
+

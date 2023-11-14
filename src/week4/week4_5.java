@@ -1,6 +1,6 @@
 package week4;
 
-public class countBit {
+public class week4_5 {
     public int[] countBitsOne(int n) {
         int[] ans=new int[n+1];
         for(int i=0;i<n+1;i++){

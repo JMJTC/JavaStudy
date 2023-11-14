@@ -3,7 +3,7 @@ package week4;
 /**
  * @author jmjtc
  */
-public class findKOr {
+public class week4_1 {
     public static int findKOr(int[] nums, int k) {
         int ans=0;
         //记录数组中各位数字为一的个数

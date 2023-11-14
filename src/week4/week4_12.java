@@ -2,6 +2,9 @@ package week4;
 
 import java.util.Scanner;
 
+/**
+ * @author jmjtc
+ */
 public class week4_12 {
     public static boolean isHuiWen(int[] a,int[] b){
         int n=a.length;

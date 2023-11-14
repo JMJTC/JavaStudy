@@ -3,7 +3,7 @@ package week4;
 /**
  * @author jmjtc
  */
-public class xOfSqrt {
+public class week4_4 {
     public static int mySqrt(int x) {
         int left=1;
         int right=1<<17;
