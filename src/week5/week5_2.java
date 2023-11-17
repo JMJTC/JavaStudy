@@ -9,8 +9,8 @@ public class week5_2 {
 }
 
 
-
-class week5_2Solution1 {
+//超时，不可取
+class week5_2_Solution1 {
     public boolean isContain(int target,int r,int[] heaters){
         int length=heaters.length;
         for(int i=0;i<length;i++){
@@ -36,7 +36,7 @@ class week5_2Solution1 {
     }
 }
 
-class week5_2Solution2 {
+class week5_2_Solution2 {
 
     public int findRadius(int[] houses, int[] heaters) {
         //先排序

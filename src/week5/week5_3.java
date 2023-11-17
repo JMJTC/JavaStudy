@@ -23,22 +23,29 @@ public class week5_3 {
 //}
 class week5_3_Solution {
     public String frequencySort(String s) {
+        //根据Ascll码表
         int[][] cnts = new int[128][2];
         char[] cs = s.toCharArray();
+        //初始化cnts,记录每个字符出现的次数
+        //第一层记录字符，第二层记录次数
         for (int i = 0; i < 128; i++) {
             cnts[i][0] = i;
         }
         for (char c : cs) {
             cnts[c][1]++;
         }
+        //自定义排序，
         Arrays.sort(cnts, (a, b)->{
-            return a[1] != b[1] ? b[1] - a[1] : a[0] - b[0];
+            //大于零就交换
+            return b[1]-a[1];
         });
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 128; i++) {
             char c = (char)cnts[i][0];
             int k = cnts[i][1];
-            while (k-- > 0) sb.append(c);
+            while (k-- > 0) {
+                sb.append(c);
+            }
         }
         return sb.toString();
     }
