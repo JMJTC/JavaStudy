@@ -10,7 +10,6 @@ public class Problem1631 {
 }
 class Problem1631Solution {
     int[][] dirs={{-1,0},{1,0},{0,-1},{0,1}};
-
     public int minimumEffortPath(int[][] heights) {
         int m=heights.length;//行
         int n=heights[0].length;//列
