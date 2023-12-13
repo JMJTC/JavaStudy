@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 public class Problem2454 {
 }
 
-class Solution {
+class Problem2454Solution {
     public int[] secondGreaterElement(int[] nums) {
         int length=nums.length;
         int[] ans=new int[length];
