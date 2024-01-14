@@ -1,4 +1,4 @@
-package Algorithm.CodeCapriccio.Ch2_LinkedList;
+package Algorithm.CodeCapriccio.Ch3_HashTable;
 
 /**
  * @author jmjtc
