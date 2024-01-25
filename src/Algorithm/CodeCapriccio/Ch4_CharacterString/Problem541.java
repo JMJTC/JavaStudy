@@ -32,4 +32,26 @@ public class Problem541 {
         }
         return ans.toString();
     }
+    public String reverseStr1(String s, int k) {
+        char[] ans=s.toCharArray();
+        //取大整
+        int count=s.length()/(2*k);
+        if(s.length()%(2*k)!=0){
+            count++;
+        }
+        for(int i=0;i<count;i++){
+            int l=2*k*i,r=k*(2*i+1)-1;
+            if(r>s.length()-1){
+                r=s.length()-1;
+            }
+            while(l<r){
+                char temp=ans[l];
+                ans[l]=ans[r];
+                ans[r]=temp;
+                l++;
+                r--;
+            }
+        }
+        return new String(ans);
+    }
 }
