@@ -1,5 +1,8 @@
 package Algorithm.CodeCapriccio.Ch4_CharacterString;
 
+/**
+ * @author jmjtc
+ */
 public class Problem459 {
     public static void main(String[] args) {
 
@@ -17,7 +20,9 @@ public class Problem459 {
         // 构造 next 数组过程，j从0开始(空格)，i从2开始
         for (int i = 2, j = 0; i <= len; i++) {
             // 匹配不成功，j回到前一位置 next 数组所对应的值
-            while (j > 0 && chars[i] != chars[j + 1]) j = next[j];
+            while (j > 0 && chars[i] != chars[j + 1]) {
+                j = next[j];
+            }
             // 匹配成功，j往后移
             if (chars[i] == chars[j + 1]) j++;
             // 更新 next 数组的值
