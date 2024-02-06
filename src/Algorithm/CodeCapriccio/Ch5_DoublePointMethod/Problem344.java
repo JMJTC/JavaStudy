@@ -1,4 +1,4 @@
-package Algorithm.CodeCapriccio.DoublePointMethod;
+package Algorithm.CodeCapriccio.Ch5_DoublePointMethod;
 
 /**
  * @author jmjtc
