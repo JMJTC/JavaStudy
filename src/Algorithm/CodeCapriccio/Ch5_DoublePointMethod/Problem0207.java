@@ -1,5 +1,8 @@
 package Algorithm.CodeCapriccio.Ch5_DoublePointMethod;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * @author jmjtc
  */
@@ -46,5 +49,23 @@ public class Problem0207 {
             }
         }
         return null;
+    }
+
+    //方二：利用Set
+    public ListNode getIntersectionNode1(ListNode headA, ListNode headB){
+        Set<ListNode> visited=new HashSet<>();
+        ListNode temp=headA;
+        while(temp!=null){
+            visited.add(temp);
+            temp=temp.next;
+        }
+        temp=headB;
+        while(temp!=null){
+            if(visited.contains(temp)){
+                return temp;
+            }
+            temp=temp.next;
+        }
+        return temp;
     }
 }
