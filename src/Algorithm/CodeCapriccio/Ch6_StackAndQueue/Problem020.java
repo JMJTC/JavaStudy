@@ -11,6 +11,7 @@ public class Problem020 {
     }
     public boolean isValid(String s){
         Stack<Character> stack=new Stack<>();
+        //有一一映射的关系时，可以考虑使用HashMap
         for(char c:s.toCharArray()){
             if(stack.empty()){
                 stack.push(c);
