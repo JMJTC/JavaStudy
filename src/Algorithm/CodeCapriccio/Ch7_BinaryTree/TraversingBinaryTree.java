@@ -70,15 +70,36 @@ public class TraversingBinaryTree {
         while(!deque.isEmpty()){
             TreeNode node=deque.pop();
             ans.add(node.val);
-            if(node.right!=null){
-                deque.push(node.right);
-            }
             if(node.left!=null){
                 deque.push(node.left);
+            }
+            if(node.right!=null){
+                deque.push(node.right);
             }
         }
         Collections.reverse(ans);
         return ans;
     }
 
+    //中序
+    //迭代
+    public List<Integer> inorderTraversal(TreeNode root){
+        if(root==null){
+            return ans;
+        }
+        Deque<TreeNode> stack=new LinkedList<>();
+        while(root!=null||!stack.isEmpty()){
+            if(root!=null){
+                //一直访问到最底层
+                stack.push(root);
+                root=root.left;
+            }else{
+                root=stack.peek();
+                stack.pop();
+                ans.add(root.val);
+                root=root.right;
+            }
+        }
+        return ans;
+    }
 }
