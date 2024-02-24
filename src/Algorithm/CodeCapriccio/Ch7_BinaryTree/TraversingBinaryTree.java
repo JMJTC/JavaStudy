@@ -7,6 +7,8 @@ import java.util.*;
  */
 public class TraversingBinaryTree {
     List<Integer> ans=new ArrayList<>();
+
+
     public static void main(String[] args) {
 
     }
@@ -78,4 +80,5 @@ public class TraversingBinaryTree {
         Collections.reverse(ans);
         return ans;
     }
+
 }
