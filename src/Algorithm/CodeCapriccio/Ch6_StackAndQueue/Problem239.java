@@ -13,11 +13,11 @@ public class Problem239 {
     }
     public int[] maxSlidingWindow(int[] nums, int k) {
         //定义一个长度为nums.length-k+1的int数组ans
-int[] ans=new int[nums.length-k+1];
+        int[] ans=new int[nums.length-k+1];
 //定义一个index变量，用于记录ans数组的下标
-int index=0;
+        int index=0;
 //定义一个双端队列deque
-Deque<Integer> deque=new LinkedList<>();
+        Deque<Integer> deque=new LinkedList<>();
 //遍历nums数组
 for(int i=0;i<nums.length;i++){
     //当队列不为空，且队列头部的元素小于i-k+1时，将队列头部的元素出队
