@@ -35,21 +35,30 @@ public class TraversingBinaryTree {
 
     //迭代法
     public List<Integer> preorderTraversal1(TreeNode root){
+        //如果根节点为空，则返回null
         if(root==null){
             return null;
         }
+        //定义一个队列
         Deque<TreeNode> deque=new LinkedList<>();
+        //将根节点入队
         deque.push(root);
+        //当队列不为空时
         while(!deque.isEmpty()){
+            //出队一个节点
             TreeNode node=deque.pop();
+            //将出队的节点的值加入结果集
             ans.add(node.val);
+            //如果出队节点的右子节点不为空，则将右子节点入队
             if(node.right!=null){
                 deque.push(node.right);
             }
+            //如果出队节点的左子节点不为空，则将左子节点入队
             if(node.left!=null){
                 deque.push(node.left);
             }
         }
+        //返回结果集
         return ans;
     }
 
