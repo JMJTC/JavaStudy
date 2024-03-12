@@ -9,6 +9,10 @@ public class Node {
     public int val;
     public List<Node> children;
 
+    Node left;
+    Node right;
+    Node next;
+
     public Node() {}
 
     public Node(int _val) {
