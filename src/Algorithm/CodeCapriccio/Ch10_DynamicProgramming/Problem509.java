@@ -1,4 +1,4 @@
-package Algorithm.CodeCapriccio.Ch10_DynamicPlanning;
+package Algorithm.CodeCapriccio.Ch10_DynamicProgramming;
 
 /**
  * @author jmjtc
