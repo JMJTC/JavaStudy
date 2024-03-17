@@ -13,7 +13,7 @@ public class D_TotalRectangularArea {
         long a1=x2-x1,b1=y2-y1;//长宽
         long a2=x4-x3,b2=y4-y3;
         //1.没有重叠部分
-        if(x2 < x3 || x4 < x1){
+        if(x2 < x3 || x4 < x1||y2<y3||y1>y4){
             System.out.println(a1*b1+a2*b2);
         }else{//2.有重叠部分
             long zuoX=Math.max(x1,x3);
