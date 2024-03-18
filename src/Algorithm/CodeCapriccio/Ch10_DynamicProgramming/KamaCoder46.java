@@ -13,7 +13,7 @@ public class KamaCoder46 {
     public static void main(String[] args) {
         Scanner sc=new Scanner(System.in);
         input(sc);
-        System.out.print(getMaxValue());
+        System.out.print(getMaxValue1());
     }
 
     public static int getMaxValue(){
@@ -41,6 +41,20 @@ public class KamaCoder46 {
         return dp[m-1][n];
     }
 
+    //以为dp数组
+    public static int getMaxValue1(){
+        int[] dp=new int[n+1];
+        //将dp初始化为0
+        for(int i=0;i<=n;i++){
+            dp[i]=0;
+        }
+        for(int i=0;i<m;i++){
+            for(int j=n;j>=weight[i];j--){//好好想想这里为什么需要倒序遍历
+                dp[j]=Math.max(dp[j],dp[j-weight[i]]+values[i]);
+            }
+        }
+        return dp[n];
+    }
     public static void input(Scanner sc){
         m=sc.nextInt();n=sc.nextInt();
         weight=new int[m];
