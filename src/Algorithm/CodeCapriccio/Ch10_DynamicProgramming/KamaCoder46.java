@@ -41,7 +41,7 @@ public class KamaCoder46 {
         return dp[m-1][n];
     }
 
-    //以为dp数组
+    //一维dp数组
     public static int getMaxValue1(){
         int[] dp=new int[n+1];
         //将dp初始化为0
