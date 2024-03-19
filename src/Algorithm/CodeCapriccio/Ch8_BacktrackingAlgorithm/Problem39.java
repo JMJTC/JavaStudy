@@ -1,6 +1,7 @@
 package Algorithm.CodeCapriccio.Ch8_BacktrackingAlgorithm;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class Problem39 {
     }
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        //Arrays.sort(candidates);
         backTracking(candidates,target,0);
         return ans;
     }
@@ -29,6 +31,11 @@ public class Problem39 {
             return;
         }
         for(int i=index;i<nums.length;i++){
+            //剪枝,需要先排序
+            /*
+            if(sum+nums[i]>target){
+                break;
+            }*/
             sum+=nums[i];
             path.add(nums[i]);
             backTracking(nums,target,index);
