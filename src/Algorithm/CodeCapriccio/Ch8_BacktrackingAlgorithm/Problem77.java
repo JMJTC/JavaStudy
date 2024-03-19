@@ -34,7 +34,7 @@ public class Problem77 {
         }
         for(int i=startIndex;i<=n-(k-path.size())+1;i++){
             path.add(i);
-            backTracking(n,k,i+1);
+            backTracking1(n,k,i+1);
             //回溯
             path.remove(path.size()-1);
         }
