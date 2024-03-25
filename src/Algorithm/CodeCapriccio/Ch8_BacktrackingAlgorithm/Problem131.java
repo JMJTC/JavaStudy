@@ -6,12 +6,12 @@ import java.util.List;
 /**
  * @author jmjtc
  */
-public class Problem181 {
+public class Problem131 {
     private StringBuilder str=new StringBuilder();
     private List<List<String>> ans=new ArrayList<>();
     private List<String> path=new ArrayList<>();
     public static void main(String[] args) {
-        new Problem181().partition("aab");
+        new Problem131().partition("aab");
     }
 
     public List<List<String>> partition(String s){
