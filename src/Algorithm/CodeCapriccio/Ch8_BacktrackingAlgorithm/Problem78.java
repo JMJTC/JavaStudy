@@ -33,4 +33,18 @@ public class Problem78 {
             path.removeLast();
         }
     }
+
+    //利用二进制
+    public List<List<Integer>> subsets2(int[] nums){
+        for(int i=0;i<(1<<nums.length);i++){
+            for(int j=0;j<nums.length;j++){
+                if(((i>>j)&1)==1){
+                    path.add(nums[j]);
+                }
+            }
+            ans.add(new ArrayList<>(path));
+            path.clear();
+        }
+        return ans;
+    }
 }
