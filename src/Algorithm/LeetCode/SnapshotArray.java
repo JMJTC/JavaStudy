@@ -21,7 +21,5 @@ public class SnapshotArray {
         return count-1;
     }
 
-    public int get(int index, int snap_id) {
 
-    }
 }
