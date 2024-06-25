@@ -69,7 +69,7 @@ public class Rc_u3 {
             }
         }
         if(flag){
-            System.out.println("3 1 27");
+            System.out.println("4 19 324");
             return;
         }
 
@@ -82,7 +82,7 @@ public class Rc_u3 {
             }
         }
         if(flag){
-            System.out.println("3 7 108");
+            System.out.println("1 1 6");
         }
 
         //三个同点数
@@ -115,6 +115,6 @@ public class Rc_u3 {
         }
 
         //其他情况
-        System.out.print("1 5 6");
+        System.out.print("2 17 18");
     }
 }

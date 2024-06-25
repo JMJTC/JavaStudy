@@ -22,6 +22,11 @@ public class Clock {
                 }
             }
         }
+        new Clock().showTime();
+    }
+    public void showTime(){
+
+        System.out.println(System.currentTimeMillis());
     }
 }
 
