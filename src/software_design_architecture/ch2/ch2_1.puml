@@ -1,0 +1,50 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+interface IReceiveMsg{
+    public void receiveMsg();
+}
+
+class Email implements IReceiveMsg{
+    public void receiveMsg()
+}
+
+class WeiXIn implements IReceiveMsg{
+    public void receiveMsg()
+}
+
+class Person{
+    public IReceiveMsg msg;
+    public void setMsg(IReceiveMsg msg);
+    public void receiveMsg();
+}
+
+Person ..o IReceiveMsg
+@enduml
+
+@startuml
+'https://plantuml.com/class-diagram
+
+interface IReceiveMsg{
+    public void receiveMsg()
+}
+
+class Email implements IReceiveMsg{
+    public void receiveMsg()
+}
+
+class WeiXIn implements IReceiveMsg{
+    public void receiveMsg()
+}
+
+class Person{
+    public IReceiveMsg msg;
+    public void setMsg(IReceiveMsg msg);
+    public void receiveMsg(IReceiveMsg msg)
+}
+
+Person ..o IReceiveMsg :聚合
+
+
+@enduml
