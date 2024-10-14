@@ -6,7 +6,19 @@ package designpattern;
  */
 public class SingletonPattern {
     public static void main(String[] args) {
-
+        //创建线程实例
+        Thread[] threads = new Thread[5];
+        for (int i = 0; i < threads.length; i++) {
+            threads[i] = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    //获取单例实例
+                    Singleton2 singleton = Singleton2.getInstance();
+                    System.out.println(singleton);
+                }
+            });
+            threads[i].start();
+        }
     }
 }
 
