@@ -1,0 +1,81 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Skin{
+    public void type();
+}
+
+class SpringSkin implements Skin{
+    public void type();
+}
+
+class SummerSkin implements Skin{
+    public void type();
+}
+
+interface Color{
+    public void fill();
+}
+
+class Green implements Color{
+    public void fill();
+}
+
+class Blue implements Color{
+    public void fill();
+}
+
+interface Component{
+    public void draw();
+}
+
+class Button implements Component{
+    public void draw();
+}
+
+class TextField implements Component{
+    public void draw();
+}
+
+class CheckBox implements Component{
+    public void draw();
+}
+
+interface AbstractFactory{
+    public Skin getSkin(String skin);
+    public Color getColor(String color);
+    public Component getComponent(String component);
+}
+
+class SkinFactory implements AbstractFactory{
+    public Skin getSkin(String skin);
+    public Color getColor(String color);
+    public Component getComponent(String component);
+}
+
+class ColorFactory implements AbstractFactory{
+    public Skin getSkin(String skin);
+    public Color getColor(String color);
+    public Component getComponent(String component);
+}
+
+class ComponentFactory implements AbstractFactory{
+    public Skin getSkin(String skin);
+    public Color getColor(String color);
+    public Component getComponent(String component);
+}
+
+class FactoryProductor{
+    public static AbstractFactory getFactory(String factory);
+}
+class Client{
+    public static void main(String[] args);
+}
+
+SkinFactory ..> Skin
+ColorFactory ..> Color
+ComponentFactory ..> Component
+FactoryProductor ..> AbstractFactory
+Client ..>FactoryProductor
+
+@enduml
