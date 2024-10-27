@@ -1,6 +1,6 @@
 package algorithm.code_capriccio.Ch1_Array;
 
-import static algorithm.EveryWeekStudy.week4.week4_4.mySqrt;
+import static algorithm.everyweekstudy.week4.week4_4.mySqrt;
 
 /**
  * @author jmjtc
