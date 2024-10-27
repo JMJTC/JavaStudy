@@ -1,0 +1,24 @@
+@startuml
+interface ScoreOperation {
+    + sort(int[]): void
+    + search(int[], int): int
+}
+class Client
+class QuickSort {
+    + quickSort(int[]): void
+}
+
+class BinarySearch {
+    + binarySearch(int[], int): int
+}
+
+class ScoreOperationAdapter {
+    + sort(int[]): void
+    + search(int[], int): int
+}
+
+Client -- ScoreOperation
+ScoreOperation <|-- ScoreOperationAdapter
+ScoreOperationAdapter ..> QuickSort
+ScoreOperationAdapter ..> BinarySearch
+@enduml

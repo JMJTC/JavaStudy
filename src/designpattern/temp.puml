@@ -1,0 +1,13 @@
+@startuml
+
+interface Component
+class ConcreteComponent implements Component
+
+
+abstract class Decorator implements Component
+
+class Decorator1 extends Decorator
+class Decorator2 extends Decorator
+
+
+@enduml

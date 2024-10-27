@@ -1,0 +1,41 @@
+@startuml
+
+interface ReportDisplay {
+    displayReport()
+}
+
+interface ReportDataCollector {
+    collectData()
+}
+
+class TextFileDataCollector {
+    +collectData(): Data
+}
+
+class DatabaseDataCollector {
+    +collectData(): Data
+}
+
+class ExcelDataCollector {
+    +collectExcelData(): ExcelData
+}
+
+class ExcelDataCollectorAdapter implements ReportDataCollector {
+    -excelDataCollector: ExcelDataCollector
+    +collectData(): Data
+}
+
+class ReportProcessor {
+    -reportDisplay: ReportDisplay
+    -reportDataCollector: ReportDataCollector
+    +processReport(): void
+}
+
+TextFileDataCollector ..|> ReportDataCollector
+DatabaseDataCollector ..|> ReportDataCollector
+
+ExcelDataCollectorAdapter .. ExcelDataCollector
+ReportProcessor ..o ReportDisplay
+ReportProcessor ..o ReportDataCollector
+
+@enduml
