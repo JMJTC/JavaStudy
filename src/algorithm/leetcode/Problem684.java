@@ -1,5 +1,7 @@
 package algorithm.leetcode;
 
+import java.util.Arrays;
+
 /**
  * @Author: jmjtc
  * @CreateTime: 2024-10-27
@@ -10,8 +12,8 @@ package algorithm.leetcode;
 public class Problem684 {
     public static void main(String[] args) {
        int[][] edges={{1,5},{2,4},{3,4},{1,3},{3,5}};
-       new Problem684().findRedundantConnection(edges);
-
+       int[] ans=new Problem684().findRedundantConnection(edges);
+       System.out.println(Arrays.toString(ans));
     }
 
     //并查集
