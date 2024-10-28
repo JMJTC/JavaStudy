@@ -4,7 +4,7 @@ package algorithm.offer150.ch01;
  * @author jmjtc
  * <a href="https://leetcode.cn/problems/remove-element/description/?envType=study-plan-v2&envId=top-interview-150">...</a>
  */
-public class problem02 {
+public class Problem02 {
     public static void main(String[] args) {
 
     }
