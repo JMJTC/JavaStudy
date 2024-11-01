@@ -13,6 +13,18 @@ public class Problem3259 {
         System.out.println(new Problem3259().maxEnergyBoost(a,b));
     }
 
+    //dp
+    public long maxEnergyBoost1(int[] a, int[] b){
+        int n=a.length;
+        long[][] dp=new long[n+2][2];
+        for(int i=0;i<n;i++){
+            dp[i+2][0]=Math.max(dp[i+1][0],dp[i][1])+a[i];
+            dp[i+2][1]=Math.max(dp[i+1][1],dp[i][0])+b[i];
+        }
+        return Math.max(dp[n+1][0],dp[n+1][1]);
+    }
+
+    //记忆化搜索
     public long maxEnergyBoost(int[] a, int[] b){
         int n=a.length;
         long[][] memo=new long[n][2];
