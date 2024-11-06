@@ -1,0 +1,15 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+title: 备忘录模式
+
+class Memento
+
+class Originator
+
+class Caretaker
+
+Caretaker o.. Memento
+
+
+@enduml

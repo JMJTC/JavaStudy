@@ -1,0 +1,34 @@
+@startuml
+interface Laptop {
+    +start(): void
+    +shutdown(): void
+}
+
+class HPLaptop implements Laptop {
+    +start(): void
+    +shutdown(): void
+}
+
+class AcerLaptop implements Laptop {
+    +start(): void
+    +shutdown(): void
+}
+
+class LenovoLaptop implements Laptop {
+    +start(): void
+    +shutdown(): void
+}
+
+class DellLaptop implements Laptop {
+    +start(): void
+    +shutdown(): void
+}
+
+class LaptopFactory {
+    +createLaptop(String brand): Laptop
+}
+
+
+
+LaptopFactory ..> Laptop : creates
+@enduml

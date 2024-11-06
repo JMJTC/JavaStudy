@@ -1,0 +1,11 @@
+@startuml
+class AppConfig {
+    -static AppConfig instance
+    -String parameter
+    -AppConfig() : AppConfig
+    +static getInstance() : AppConfig
+    +getParameter() : String
+    +setParameter(String parameter) : void
+    +displayParameter() : void
+}
+@enduml
