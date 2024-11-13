@@ -1,4 +1,4 @@
-package designpattern.StatePattern.eg1;
+package designpattern.statepattern.eg1;
 
 /**
  * @Author: jmjtc
