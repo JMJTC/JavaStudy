@@ -1,34 +1,45 @@
 @startuml
-interface Laptop {
-    +start(): void
-    +shutdown(): void
+interface Computer{
+    void produce()
 }
 
-class HPLaptop implements Laptop {
-    +start(): void
-    +shutdown(): void
+interface ComputerFactory{
+    Computer createComputer()
 }
 
-class AcerLaptop implements Laptop {
-    +start(): void
-    +shutdown(): void
+class HPComputer implements Computer{
+    + public void produce()
 }
 
-class LenovoLaptop implements Laptop {
-    +start(): void
-    +shutdown(): void
+class DellComputer implements Computer{
+    + public void produce()
 }
 
-class DellLaptop implements Laptop {
-    +start(): void
-    +shutdown(): void
+class AcerComputer implements Computer{
+    + public void produce()
 }
 
-class LaptopFactory {
-    +createLaptop(String brand): Laptop
+class LenovoComputer implements Computer{
+    + public void produce()
 }
 
 
 
-LaptopFactory ..> Laptop : creates
+class HPComputerFactory implements ComputerFactory{
+    + Computer createComputer()
+}
+class DellComputerFactory implements ComputerFactory{
+    + Computer createComputer()
+}
+class AcerComputerFactory implements ComputerFactory{
+    + Computer createComputer()
+}
+class LenovoComputerFactory implements ComputerFactory{
+    + Computer createComputer()
+}
+
+HPComputerFactory ..> HPComputer
+DellComputerFactory ..>DellComputer
+AcerComputerFactory..>AcerComputer
+LenovoComputerFactory..>LenovoComputer
 @enduml

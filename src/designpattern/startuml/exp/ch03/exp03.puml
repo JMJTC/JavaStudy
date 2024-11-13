@@ -1,0 +1,50 @@
+@startuml
+interface AbstractHamburg{
+    void display()
+}
+interface AbstractCola{
+    void display()
+}
+
+class HamburgA implements AbstractHamburg{
+    + void display()
+}
+
+class HamburgB implements AbstractHamburg{
+    + void display()
+}
+
+
+
+class ColaA implements AbstractCola{
+    + void display()
+}
+
+class ColaB implements AbstractCola{
+    + void display()
+}
+
+interface Factory{
+    AbstractHamburg createHamburg();
+    AbstractCola createCola();
+}
+
+class McDonaldsFactory implements Factory{
+    + AbstractHamburg createHamburg();
+    + AbstractCola createCola();
+}
+
+class KFCFactory implements Factory{
+    + AbstractHamburg createHamburg();
+    + AbstractCola createCola();
+}
+
+KFCFactory ..> HamburgA
+KFCFactory ..> ColaA
+McDonaldsFactory ..>HamburgB
+McDonaldsFactory ..>ColaB
+Client -->Factory
+Client -->AbstractHamburg
+Client -->AbstractCola
+
+@enduml
