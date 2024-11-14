@@ -1,27 +1,48 @@
 @startuml
-'https://plantuml.com/class-diagram
-
-abstract class AbstractList
-abstract AbstractCollection
-interface List
-interface Collection
-
-List <|-- AbstractList
-Collection <|-- AbstractCollection
-
-Collection <|- List
-AbstractCollection <|- AbstractList
-AbstractList <|-- ArrayList
-
-class ArrayList {
-Object[] elementData
-size()
+class Car{
+    - String wheel
+    - String oilBox
+    - String body
+    + String getWheel()
+    + String getOilBox()
+    + String getBody()
+    + String setWheel()
+    + String setOilBox()
+    + String setBody()
+    + String toString()
 }
 
-enum TimeUnit {
-DAYS
-HOURS
-MINUTES
+interface Builder{
+    void buildWheel()
+    void buildOilBox()
+    void buildBody()
+    Car getCar()
 }
+
+class BMWBuilder implements Builder{
+    +void buildWheel()
+    +void buildOilBox()
+    +void buildBody()
+    +Car getCar()
+}
+
+class BenZBuilder implements Builder{
+    +void buildWheel()
+    +void buildOilBox()
+    +void buildBody()
+    +Car getCar()
+}
+
+class Director {
+    - Builder builder
+    + Director(Builder builder)
+    + Car construct(String body,String oilBox,String wheel)
+}
+
+Director o-- Builder
+BMWBuilder ..>Car
+BenZBuilder ..>Car
+Director ..>Car
+
 
 @enduml
