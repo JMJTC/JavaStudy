@@ -1,0 +1,35 @@
+@startuml
+'https://plantuml.com/class-diagram
+ interface Chart{
+    void draw();
+ }
+
+ class Circle implements Chart{
+    + void draw();
+ }
+
+ class Rectangle implements Chart{
+    +void draw();
+ }
+
+ class Line implements Chart{
+    +void draw();
+ }
+
+ class Angle{
+    + void DrawAngle();
+ }
+
+ class Adapter implements Chart{
+    - Angle angle;
+    + Adapter(Angle angle);
+    + void draw();
+ }
+ class Client{
+    + static void main(String[] args);
+ }
+
+ Adapter o-- Angle :聚合
+ Client --> Chart
+
+@enduml
