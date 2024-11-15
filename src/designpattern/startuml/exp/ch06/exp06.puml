@@ -1,0 +1,43 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Flavor{
+    void add();
+}
+
+class MilkFlavor implements Flavor{
+    + void add();
+}
+
+class SugarFlavor implements Flavor{
+    + void add();
+}
+
+class LemonFlavor implements Flavor{
+    + void add();
+}
+
+abstract class Coffee{
+    # Flavor flavor;
+    + Coffee(Flavor flavor);
+    + abstract void operation();
+}
+
+class JorumCoffee extends Coffee{
+    + void operation();
+    + JorumCoffee((Flavor flavor)
+}
+
+class MediumCoffee extends Coffee{
+    + void operation();
+    + MediumCoffee((Flavor flavor)
+}
+
+class SmallCoffee extends Coffee{
+    + void operation();
+    + SmallCoffee((Flavor flavor)
+}
+
+Coffee o-- Flavor
+
+@enduml
