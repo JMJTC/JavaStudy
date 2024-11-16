@@ -1,0 +1,40 @@
+@startuml
+
+interface Sheep {
+    + String run()
+    + String loseLife()
+}
+
+class BasicSheep implements Sheep {
+    - lives: int
+    + String run()
+    + String loseLife()
+    + int getLives()
+}
+
+abstract class SheepDecorator implements Sheep {
+    # decoratedSheep: Sheep
+    + String run()
+    + String loseLife()
+}
+
+
+
+class RedAppleDecorator extends SheepDecorator {
+    + String run()
+    + String loseLife()
+}
+
+class GreenAppleDecorator extends SheepDecorator {
+    + String run()
+    + String loseLife()
+}
+
+class YellowAppleDecorator extends SheepDecorator {
+    + String run()
+    + String loseLife()
+}
+
+SheepDecorator o--> Sheep
+
+@enduml
