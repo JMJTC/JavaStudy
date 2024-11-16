@@ -1,0 +1,39 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+class Camera{
+    + void on();
+    + void off();
+}
+
+class Light{
+    + void on();
+    + void off();
+}
+
+class Sensor{
+    + void on();
+    + void off();
+}
+
+class Alarm{
+    + void on();
+    + void off();
+}
+
+class Facade{
+    - Camera camera
+    - Light light
+    - Sensor sensor
+    - Alarm alarm
+    + Facade()
+    + void on()
+    + void off()
+}
+
+Facade -->Camera
+Facade -->Light
+Facade -->Sensor
+Facade -->Alarm
+
+@enduml
