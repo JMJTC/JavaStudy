@@ -1,0 +1,41 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+abstract class State{
+    # Account acc
+    + void deposit(double money)
+    + void withdraw(double money)
+    + stateCheck()
+}
+
+class GreenState extends State{
+    + void deposit(double money)
+    + void withdraw(double money)
+    + stateCheck()
+}
+
+class YellowState extends State{
+    + void deposit(double money)
+    + void withdraw(double money)
+    + stateCheck()
+}
+
+class RedState extends State{
+    + void deposit(double money)
+    + void withdraw(double money)
+    + stateCheck()
+}
+
+class Account{
+    - State state
+    - String name
+    - double balance
+    + Account(String name,double balance)
+    + void deposit(double money)
+    + void withdraw(double money)
+}
+State -->Account
+Account o-- State
+
+
+@enduml
