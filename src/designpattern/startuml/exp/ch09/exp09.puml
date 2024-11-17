@@ -1,0 +1,37 @@
+@startuml
+
+abstract class Member{
+    + abstract void update();
+}
+
+abstract class Product{
+    - List<Member> members;
+    + abstract void addMember(Member member);
+    + abstract void removeMember(Member member);
+    + void notifyToAll()
+    + List<Member> getMembers();
+}
+Product -->Member
+
+class ConcreteMember extends Member{
+    - String name;
+    - String observerState;
+    - Product product;
+    + void update();
+    + ConcreteMember(String name,Product product)
+}
+
+class ConcreteProduct extends Product{
+    - String name;
+    - String price;
+    + ConcreteProduct(String name,String price)
+    + void setPrice(String price)
+    + void setName(String name)
+    + String getPrice()
+    + String getName()
+    + void addMember(Member member)
+    + void removeMember(Member member)
+}
+
+ConcreteMember-->ConcreteProduct
+@enduml
