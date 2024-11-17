@@ -1,0 +1,24 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Discount{
+     +double calculateDiscount()
+}
+
+class ComputerDiscount implements Discount{
+     +double calculateDiscount()
+}
+
+class EnglishDiscount implements Discount{
+    +double calculateDiscount()
+}
+
+class BookSale{
+    - double price
+    - Discount discount
+    + void setDiscount(Discount discount)
+    + void setPrice(double price)
+    + double getPrice(double price)
+}
+BookSale o-- Discount
+@enduml
