@@ -19,12 +19,12 @@ class Test1{
     public static void main(String[] args) {
 
         //测试
-        Mail mail = new Mail();
+        Mail2 mail = new Mail2();
         mail.setContent("邮件内容");
         mail.setName("张三");
         mail.setAddress("1234567890");
         mail.setAttachment(new Attachment("附件.txt"));
-        Mail mail1 = (Mail) mail.clone();
+        Mail2 mail1 = (Mail2) mail.clone();
         System.out.println(mail1);
         System.out.println("邮件是否相同:"+ (mail == mail1));
         System.out.println("附件是否相同:"+ (mail.getAttachment() == mail1.getAttachment()));
@@ -114,8 +114,79 @@ class Mail extends Prototype{
 
 }
 
+//具体原型类 邮件类型
+class Mail2 extends Prototype{
+    private String name;
+    private String address;
+    private String content;
+    private Attachment attachment;
+
+    @Override
+    public Prototype clone() {
+        Mail2 mail=(Mail2)clonePrototype();
+        mail.attachment=attachment.clone();
+        return mail;
+    }
+
+    @Override
+    public String toString() {
+        return "Mail{" +
+                "name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                ", content='" + content + '\'' +
+                ", attachment=" + attachment.getName() +
+                '}';
+    }
+
+    public Attachment getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(Attachment attachment) {
+        this.attachment = attachment;
+    }
+
+    public Mail2(String name, String address, String content, Attachment attachment) {
+        this.name = name;
+        this.address = address;
+        this.content = content;
+        this.attachment = attachment;
+    }
+    public Mail2(){
+
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+
+}
+
+
+
 //邮件的附件
-class Attachment{
+class Attachment implements Cloneable{
     private String name;
     public void download(){
         System.out.println("下载附件:"+name);
@@ -131,6 +202,14 @@ class Attachment{
 
     public void setName(String name) {
         this.name = name;
+    }
+    public Attachment clone(){
+        try{
+            return (Attachment) super.clone();
+        }catch (CloneNotSupportedException e){
+            e.printStackTrace();
+            return null;
+        }
     }
 }
 
