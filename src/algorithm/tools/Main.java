@@ -1,19 +1,32 @@
 package algorithm.tools;
 
+import java.sql.SQLSyntaxErrorException;
+
 /**
  * @author jmjtc
  */
 public class Main {
     public static void main(String[] args) {
+        Cat cat=new Cat("cat123");
+        Cat cat1=cat;
+        cat1.setName("123");
+        System.out.println(cat.getName());
 
-        double e=2.7182;
-        double PI=3.1415926;
-        System.out.println(PI);
-        for(double x=0;x<2;x+=0.1 ){
-            double temp=(Math.pow(e,1/2*x)-1);
-            System.out.println(temp);
-            double num=Math.sin(PI/(Math.pow(e,1/2*x)-1)-2*x*PI);
-            System.out.println(num);
-        }
+    }
+}
+
+class Cat{
+    String name;
+
+    public Cat(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
