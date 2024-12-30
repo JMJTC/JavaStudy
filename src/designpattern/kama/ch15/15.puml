@@ -1,0 +1,26 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+interface Command{
+    on():void
+    off():void
+}
+
+class ConcreteCommand1 implements Command{
+    - light:Light
+    + on():void
+    + off():void
+}
+
+class Invoker{
+    - command:Command
+    +
+}
+
+class Light{
+
+}
+
+Invoker o-- Command
+ConcreteCommand --> Light
+@enduml
