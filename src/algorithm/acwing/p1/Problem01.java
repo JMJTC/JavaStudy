@@ -23,7 +23,7 @@ public class Problem01 {
         String[] s = br.readLine().split(" ");
         int a = Integer.parseInt(s[0]);
         int b = Integer.parseInt(s[1]);
-        bw.write(a + b + "\n");
+        bw.write(a + b +"\n");
         bw.flush();
     }
 }
