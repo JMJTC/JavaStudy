@@ -27,7 +27,9 @@ public class Problem02 {
         for(int i=1;i<=n;i++){
             for(int j=1;j<=v;j++){
                 if(j>=weight[i]){
-                    dp[i][j]=Math.max(dp[i-1][j-weight[i-1]]+value[i],dp[i-1][j]);
+                    dp[i][j]=Math.max(dp[i-1][j-weight[i]]+value[i],dp[i-1][j]);
+                }else{
+                    dp[i][j]=dp[i-1][j];
                 }
             }
         }
