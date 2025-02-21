@@ -54,7 +54,7 @@ public class Problem03 {
             }
         }
 
-        bw.write(dp3[v]+"\n");
+        bw.write(dp3[v]+"");
         bw.flush();
         bw.close();
         br.close();
