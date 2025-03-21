@@ -1,0 +1,15 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+rectangle "用户界面模块" as UI
+rectangle "DNS请求构造模块" as DNSRequest
+rectangle "网络通信模块" as Network
+rectangle "DNS响应解析模块" as DNSResponse
+
+UI --> DNSRequest : 请求
+DNSRequest --> Network : 发送请求
+Network --> DNSResponse : 接收响应
+DNSResponse --> UI : 返回结果
+
+@enduml

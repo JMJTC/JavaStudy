@@ -1,0 +1,16 @@
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+
+start
+:解析头部;
+:跳过问题部分;
+:遍历回答记录;
+if (记录类型是A记录?) then (是)
+  :提取A记录;
+else (否)
+  :跳过;
+endif
+stop
+
+@enduml
