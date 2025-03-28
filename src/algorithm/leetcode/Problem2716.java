@@ -10,18 +10,29 @@ public class Problem2716 {
     public static void main(String[] args) {
 
     }
+
     public int minimizedStringLength(String s) {
         int ans = 0;
         int length = s.length();
         int[] count = new int[26];
-        for(int i = 0; i < length; i++){
-            count[s.charAt(i)-'a']++;
-        };
-        for(int i : count){
-            if(i > 0){
+        for (int i = 0; i < length; i++) {
+            count[s.charAt(i) - 'a']++;
+        }
+
+        for (int i : count) {
+            if (i > 0) {
                 ans++;
             }
         }
         return ans;
+    }
+
+    //位运算
+    public int minimizedStringLength1(String s) {
+        int mask = 0;
+        for(char c : s.toCharArray()){
+            mask |= 1 << c - 'a';
+        }
+        return Integer.bitCount(mask);
     }
 }
