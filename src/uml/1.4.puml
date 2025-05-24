@@ -1,0 +1,40 @@
+@startuml
+' UI组件模块
+package "UI Components" {
+    class KParamBox {
+        +KParamBox(QString, QWidget*)
+        +enter/leaveEvent(QEvent*)
+        -QVBoxLayout* m_pVLayout
+        -QString m_title
+    }
+
+    class KColorBox  {
+        +showPickColorDlg()
+        -QPushButton* m_pColorBtn
+    }
+    KColorBox --|> KParamBox
+
+    class KComboBox  {
+        +setItem(int)
+        +pickedItem()
+        -QComboBox* m_pComboBox
+    }
+
+    KComboBox --|> KParamBox
+
+    KShapeLineTypeBox --|> KComboBox
+    KFontFamilyBox --|> KComboBox
+    KFontStyleBox --|> KComboBox
+
+    class KToolBar {
+        +KToolBar(QWidget*)
+        -QButtonGroup* m_pBtnGroup
+        -KButtonTipManager* m_pButtonTipManager
+    }
+
+    KCanvasParamsBar *-- KParamBox : 包含
+    KCanvasParamsBar *-- KComboBox : 包含
+    KCanvasParamsBar *-- KColorBox : 包含
+    KMainWindow *-- KToolBar : 包含
+}
+@enduml

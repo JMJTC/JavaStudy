@@ -1,0 +1,204 @@
+@startuml
+
+' 全局数据管理模块
+package "Global Data Management" {
+    class KGlobalData {
+        +enum class KDrawFlag
+        +static getGlobalDataIntance(): KGlobalData*
+        +setDrawFlag(KDrawFlag drawflag)
+        +getDrawFlag(): KDrawFlag
+        +setCanvasWidth(int width)
+        +getCanvasWidth(): int
+        +setCanvasHeight(int height)
+        +getCanvasHeight(): int
+        +setCanvasColor(QString colorStr)
+        +getCanvasColor(): QString
+        +getSelectedShape(): KShape*
+        +setSelectedShape()
+        +getCanvas(): KCanvas*
+        +setCanvas(KCanvas* canvas)
+        +getCanvasParamBar(): KCanvasParamsBar*
+        +setCanvasParamBar(KCanvasParamsBar* bar)
+        +popUndo(): Operation*
+        +popRedo(): Operation*
+        +getRedo(): QStack<Operation*>
+        +getUndo(): QStack<Operation*>
+        +pushUndo(Operation* op)
+        +pushRedo(Operation* op)
+        +getButtonTipManager(): KButtonTipManager*
+        -KDrawFlag m_drawFlag
+        -QPainter* m_pPainter
+        -int m_canvasWidth
+        -int m_canvasHeight
+        -QString m_canvasColor
+        -QString m_shapeColor
+        -QString m_lineColor
+        -Qt::PenStyle m_shapeLineType
+        -int m_lineWidth
+        -KShape* m_pSelectedShape
+        -qreal m_scale
+        -KCanvas* m_pCanvas
+        -KCanvasParamsBar* m_pParamBar
+        -QStack<Operation*> m_redoStack
+        -QStack<Operation*> m_undoStack
+        -KButtonTipManager* m_pButtonTipManager
+        -static std::mutex s_mutex
+        -static KGlobalData* s_pInstance
+    }
+}
+
+' 图形模块
+package "Shape Module" {
+    class KShape {
+        +virtual drawShape(QPaintDevice* parent = nullptr)
+        +virtual getShapeType() const: KShapeType
+        +virtual setStartPoint(const QPoint& point)
+        +virtual setEndPoint(const QPoint& point)
+        +virtual clone() const: KShape*
+        +virtual output()
+        +drawOutLine(QPaintDevice* parent) const
+        -QPoint m_startPoint
+        -QPoint m_endPoint
+        -QString m_shapeColor
+        -QString m_shapeLineColor
+        -int m_shapeLineWidth
+        -Qt::PenStyle m_shapeLineType
+    }
+    class KPenLine --|> KShape
+    class KLine --|> KShape
+    class KRect --|> KShape
+    class KCircle --|> KShape
+    class KText --|> KShape
+    class KPent --|> KShape
+    class KHexa --|> KShape
+    class KStar --|> KShape
+}
+
+' 操作模块
+package "Operation Module" {
+    class Operation {
+        +virtual reverse(): Operation*
+        +virtual exec()
+        +virtual dump()
+    }
+    class OpAdd --|> Operation
+    class OpDel --|> Operation
+    class OpShapePara --|> Operation
+    class OpCanvasPara --|> Operation
+}
+
+' 视图模块
+package "View Module" {
+    class KCanvas {
+        +paintEvent(QPaintEvent* event)
+        +mousePressEvent(QMouseEvent* event)
+        +mouseMoveEvent(QMouseEvent* event)
+        +mouseReleaseEvent(QMouseEvent* event)
+        +event(QEvent* event)
+        +keyPressEvent(QKeyEvent* event)
+        +getCurrentShape(const QPoint& pos): KShape*
+        +getCurrentShape(): KShape*
+        +getShapeList(): QList<KShape*>
+        +getSelected(): QList<KShape*>
+        +getDeleteStack(): QStack<KShape*>
+        +setShapeList(QList<KShape*> list)
+        +getTransType(const QPoint& pos): KTransType
+        +updateCusorStyle(KGlobalData::KDrawFlag flag, KTransType transType)
+        +dragMoveShape(KTransType transType, const QPoint& pos)
+        +MoveSelectedShape(KTransType transType, const QPoint& pos)
+        +selectAll()
+        +copySeleted()
+        +paste()
+        +deleteSelected()
+        +finishedEditing()
+        +deletePop(): KShape*
+        +deletePush(KShape*)
+        +ShapeListPrepend(KShape*)
+        +ShapeListAppend(KShape*)
+        +removeFromShapeList(KShape*)
+        +getColor(): QString
+        +setColor(QString color)
+        +selected(KShape* selectedShape)
+        -KShape* m_pCurrentShape
+        -QList<KShape*> m_pShapeList
+        -QList<KShape*> m_pClipboard
+        -QList<KShape*> m_pSelectedShapeList
+        -QStack<KShape*> m_pDeleteStack
+        -int m_cursorPosition
+        -QPoint m_lastPos
+        -KTransType m_TransType
+        -bool m_isLPress
+        -KText* currediting
+        -bool m_isDrawing
+        -bool m_isSelected
+        -bool m_isEditing
+        -bool m_isSelectedAll
+        -QString m_color
+    }
+    class KCanvasParamsBar {
+        +KCanvasParamsBar(const QString& title, QWidget* parent)
+        -KValueBox* m_pWidthBox
+        -KValueBox* m_pHeightBox
+        -KColorBox* m_pColorBox
+        -KShapeLineColorBox* m_pShapeLineColorBox
+        -KValueBox* m_pShapeLineWidthBox
+        -KShapeColorBox* m_pShapeColorBox
+        -KShapeLineTypeBox* m_pShapeLineTypeBox
+        -KFontFamilyBox* m_pFontFamilyBox
+        -KValueBox* m_pFontSizeBox
+        -KFontStyleBox* m_pFontStyleBox
+    }
+    class KToolBar {
+        +KToolBar(QWidget* parent = nullptr)
+        -setupUI()
+        -setupButtons()
+        -QVBoxLayout* m_pVLayout
+        -QButtonGroup* m_pBtnGroup
+        -std::array<KToolButton*, 9> m_buttons
+        -KButtonTipManager* m_pButtonTipManager
+    }
+    class KMainWindow {
+        +initConnection()
+    }
+}
+
+' 工具模块
+package "Tool Module" {
+    class KParamBox {
+        +KParamBox(const QString& title, QWidget* parent)
+        +enterEvent(QEvent* event)
+        +leaveEvent(QEvent* event)
+        +onHandleSlected()
+        -QVBoxLayout* m_pVLayout
+        -QString m_title
+        -QLabel* m_pTitleLabel
+    }
+    class KColorBox --|> KParamBox
+    class KComboBox --|> KParamBox
+    class KShapeLineTypeBox --|> KComboBox
+    class KFontFamilyBox --|> KComboBox
+}
+
+' 工厂模块
+package "Factory Module" {
+    class KShapeFactory {
+        +static createShape(KGlobalData::KDrawFlag drawFlag): KShape*
+        +static createShape(SvgManager::SvgElement element): KShape*
+        +createFinished(KShape* shape)
+    }
+}
+
+' 关系
+KGlobalData *-- KCanvas
+KGlobalData *-- KCanvasParamsBar
+KCanvas *-- KShape
+KCanvasParamsBar *-- KGlobalData
+KShapeFactory ..> KShape
+KMainWindow *-- KCanvasParamsBar
+KMainWindow *-- KCanvas
+OpAdd *-- KShape
+OpDel *-- KShape
+OpShapePara *-- KShape
+OpCanvasPara *-- KCanvas
+
+@enduml

@@ -1,0 +1,358 @@
+@startuml
+
+' 全局数据管理类
+class KGlobalData {
+    +enum class KDrawFlag
+    +static getGlobalDataIntance(): KGlobalData*
+    +setDrawFlag(KDrawFlag drawflag)
+    +getDrawFlag(): KDrawFlag
+    +setCanvasWidth(int width)
+    +getCanvasWidth(): int
+    +setCanvasHeight(int height)
+    +getCanvasHeight(): int
+    +setCanvasColor(QString colorStr)
+    +getCanvasColor(): QString
+    +getSelectedShape(): KShape*
+    +setSelectedShape()
+    +getCanvas(): KCanvas*
+    +setCanvas(KCanvas* canvas)
+    +getCanvasParamBar(): KCanvasParamsBar*
+    +setCanvasParamBar(KCanvasParamsBar* bar)
+    +popUndo(): Operation*
+    +popRedo(): Operation*
+    +getRedo(): QStack<Operation*>
+    +getUndo(): QStack<Operation*>
+    +pushUndo(Operation* op)
+    +pushRedo(Operation* op)
+    +getButtonTipManager(): KButtonTipManager*
+    -KDrawFlag m_drawFlag
+    -QPainter* m_pPainter
+    -int m_canvasWidth
+    -int m_canvasHeight
+    -QString m_canvasColor
+    -QString m_shapeColor
+    -QString m_lineColor
+    -Qt::PenStyle m_shapeLineType
+    -int m_lineWidth
+    -KShape* m_pSelectedShape
+    -qreal m_scale
+    -KCanvas* m_pCanvas
+    -KCanvasParamsBar* m_pParamBar
+    -QStack<Operation*> m_redoStack
+    -QStack<Operation*> m_undoStack
+    -KButtonTipManager* m_pButtonTipManager
+    -static std::mutex s_mutex
+    -static KGlobalData* s_pInstance
+}
+
+' 图形基类
+class KShape {
+    +virtual drawShape(QPaintDevice* parent = nullptr)
+    +virtual getShapeType() const: KShapeType
+    +virtual setStartPoint(const QPoint& point)
+    +virtual setEndPoint(const QPoint& point)
+    +virtual clone() const: KShape*
+    +virtual output()
+    +drawOutLine(QPaintDevice* parent) const
+    -QPoint m_startPoint
+    -QPoint m_endPoint
+    -QString m_shapeColor
+    -QString m_shapeLineColor
+    -int m_shapeLineWidth
+    -Qt::PenStyle m_shapeLineType
+}
+
+' 画笔自由绘制类
+class KPenLine {
+    +drawShape(QPaintDevice* parent)
+    +getShapeType() const: KShapeType
+    +setStartPoint(const QPoint& point)
+    +setEndPoint(const QPoint& point)
+    +loadEndPoint(const QPoint& point)
+    +loadStartPoint(const QPoint& point)
+    +updateRect()
+    +transform(qreal offsetX, qreal offsetY, qreal fixX, qreal fixY)
+    +move(const QPoint& offset)
+    +moveTop(const QPoint& pos)
+    +moveBottom(const QPoint& pos)
+    +moveLeft(const QPoint& pos)
+    +moveRight(const QPoint& pos)
+    +moveTopLeft(const QPoint& pos)
+    +moveTopRight(const QPoint& pos)
+    +moveBottomLeft(const QPoint& pos)
+    +moveBottomRight(const QPoint& pos)
+    +clone() const: KPenLine*
+    +output()
+    -QPainterPath m_path
+}
+
+' 直线类
+class KLine {
+    +drawShape(QPaintDevice* parent)
+    +clone() const: KLine*
+    +getShapeType() const: KShapeType
+    +output()
+}
+
+' 矩形类
+class KRect {
+    +drawShape(QPaintDevice* parent)
+    +clone() const: KRect*
+    +getShapeType() const: KShapeType
+    +output()
+}
+
+' 圆形类
+class KCircle {
+    +drawShape(QPaintDevice* parent)
+    +clone() const: KCircle*
+    +getShapeType() const: KShapeType
+    +output()
+}
+
+' 文本类
+class KText {
+    +drawShape(QPaintDevice* parent)
+    +output()
+    +drawRect(QPaintDevice* parent)
+    +clone() const: KText*
+    +getShapeType() const: KShapeType
+    +setStartPoint(const QPoint& point)
+    +setEndPoint(const QPoint& point)
+    +getCurrentText() const: QString
+    +setCurrentText(const QString& text)
+    +setIsEditing(bool isEditing)
+    +setFontFamily(const QString& family)
+    +setFontSize(int size)
+    +setFontBold(bool bold)
+    +setFontItalic(bool italic)
+    +setFontUnderline(bool underline)
+    +getFontFamily() const: QString
+    +getFontSize() const: int
+    +isFontBold() const: bool
+    +isFontItalic() const: bool
+    +isFontUnderline() const: bool
+    -QString m_currentText
+    -QString m_oldText
+    -bool m_hasFocus
+    -QPoint m_cursorPosition
+    -bool m_isEditing
+    -QRect m_textRect
+    -int m_fontSize
+    -QFont m_font
+    -QString m_fontFamily
+}
+
+' 五边形类
+class KPent {
+    +drawShape(QPaintDevice* parent)
+    +clone() const: KPent*
+    +getShapeType() const: KShapeType
+    +output()
+}
+
+' 图形工厂类
+class KShapeFactory {
+    +static createShape(KGlobalData::KDrawFlag drawFlag): KShape*
+    +static createShape(SvgManager::SvgElement element): KShape*
+    +createFinished(KShape* shape)
+}
+
+' 操作基类
+class Operation {
+    +virtual reverse(): Operation*
+    +virtual exec()
+    +virtual dump()
+}
+
+' 添加图形操作类
+class OpAdd {
+    +OpAdd(KShape* shape)
+    +reverse(): Operation*
+    +exec()
+    +dump()
+    -KShape* m_pShape
+}
+
+' 删除图形操作类
+class OpDel {
+    +OpDel(KShape* shape)
+    +reverse(): Operation*
+    +exec()
+    +dump()
+    -KShape* m_pShape
+}
+
+' 图形参数操作类
+class OpShapePara {
+    +OpShapePara(KShape* shape, KShapeParaType type, QVariant oldval, QVariant newval)
+    +reverse(): Operation*
+    +exec()
+    +dump()
+    -KShapeParaType m_type
+    -KShape* m_pShape
+    -QVariant m_new
+    -QVariant m_old
+}
+
+' 画布参数操作类
+class OpCanvasPara {
+    +OpCanvasPara(KCanvasParaType type, QVariant oldval, QVariant newval)
+    +reverse(): Operation*
+    +exec()
+    +dump()
+    -KCanvasParaType m_type
+    -KShape* m_pShape
+    -QVariant m_new
+    -QVariant m_old
+}
+
+' 画布类
+class KCanvas {
+    +paintEvent(QPaintEvent* event)
+    +mousePressEvent(QMouseEvent* event)
+    +mouseMoveEvent(QMouseEvent* event)
+    +mouseReleaseEvent(QMouseEvent* event)
+    +event(QEvent* event)
+    +keyPressEvent(QKeyEvent* event)
+    +getCurrentShape(const QPoint& pos): KShape*
+    +getCurrentShape(): KShape*
+    +getShapeList(): QList<KShape*>
+    +getSelected(): QList<KShape*>
+    +getDeleteStack(): QStack<KShape*>
+    +setShapeList(QList<KShape*> list)
+    +getTransType(const QPoint& pos): KTransType
+    +updateCusorStyle(KGlobalData::KDrawFlag flag, KTransType transType)
+    +dragMoveShape(KTransType transType, const QPoint& pos)
+    +MoveSelectedShape(KTransType transType, const QPoint& pos)
+    +selectAll()
+    +copySeleted()
+    +paste()
+    +deleteSelected()
+    +finishedEditing()
+    +deletePop(): KShape*
+    +deletePush(KShape*)
+    +ShapeListPrepend(KShape*)
+    +ShapeListAppend(KShape*)
+    +removeFromShapeList(KShape*)
+    +getColor(): QString
+    +setColor(QString color)
+    +selected(KShape* selectedShape)
+    -KShape* m_pCurrentShape
+    -QList<KShape*> m_pShapeList
+    -QList<KShape*> m_pClipboard
+    -QList<KShape*> m_pSelectedShapeList
+    -QStack<KShape*> m_pDeleteStack
+    -int m_cursorPosition
+    -QPoint m_lastPos
+    -KTransType m_TransType
+    -bool m_isLPress
+    -KText* currediting
+    -bool m_isDrawing
+    -bool m_isSelected
+    -bool m_isEditing
+    -bool m_isSelectedAll
+    -QString m_color
+}
+
+' 画布参数栏类
+class KCanvasParamsBar {
+    +KCanvasParamsBar(const QString& title, QWidget* parent)
+    -KValueBox* m_pWidthBox
+    -KValueBox* m_pHeightBox
+    -KColorBox* m_pColorBox
+    -KShapeLineColorBox* m_pShapeLineColorBox
+    -KValueBox* m_pShapeLineWidthBox
+    -KShapeColorBox* m_pShapeColorBox
+    -KShapeLineTypeBox* m_pShapeLineTypeBox
+    -KFontFamilyBox* m_pFontFamilyBox
+    -KValueBox* m_pFontSizeBox
+    -KFontStyleBox* m_pFontStyleBox
+}
+
+' 通用参数框类
+class KParamBox {
+    +KParamBox(const QString& title, QWidget* parent)
+    +enterEvent(QEvent* event)
+    +leaveEvent(QEvent* event)
+    +onHandleSlected()
+    -QVBoxLayout* m_pVLayout
+    -QString m_title
+    -QLabel* m_pTitleLabel
+}
+
+' 颜色选择框类
+class KColorBox {
+    +KColorBox(const QString& title, const QString& rgbColorStr, QWidget* parent)
+    +showPickColorDlg()
+    -QPushButton* m_pColorBtn
+}
+
+' 下拉框类
+class KComboBox {
+    +KComboBox(const QString& title, QWidget* parent)
+    +setItem(int index)
+    +pickedItem()
+    +onComboBoxIndexChanged(int index)
+    -QComboBox* m_pComboBox
+}
+
+' 图形轮廓线类型选择框类
+class KShapeLineTypeBox {
+    +KShapeLineTypeBox(const QString& title, QWidget* parent)
+    +setItem(int index)
+}
+
+' 字体族选择框类
+class KFontFamilyBox {
+    +KFontFamilyBox(const QString& title, QWidget* parent)
+    +getCurrentFontFamily() const: QString
+    +setCurrentFontFamily(const QString& family)
+    +setItem(int index)
+    +initFontFamilies()
+}
+
+' 工具栏类
+class KToolBar {
+    +KToolBar(QWidget* parent = nullptr)
+    -setupUI()
+    -setupButtons()
+    -QVBoxLayout* m_pVLayout
+    -QButtonGroup* m_pBtnGroup
+    -std::array<KToolButton*, 9> m_buttons
+    -KButtonTipManager* m_pButtonTipManager
+}
+
+' 主窗口类
+class KMainWindow {
+    +initConnection()
+}
+
+' 关系
+KPenLine --|> KShape
+KLine --|> KShape
+KRect --|> KShape
+KCircle --|> KShape
+KText --|> KShape
+KPent --|> KShape
+
+OpAdd --|> Operation
+OpDel --|> Operation
+OpShapePara --|> Operation
+OpCanvasPara --|> Operation
+
+KCanvasParamsBar --|> KParamsBar
+KColorBox --|> KParamBox
+KComboBox --|> KParamBox
+KShapeLineTypeBox --|> KComboBox
+KFontFamilyBox --|> KComboBox
+
+KGlobalData *-- KCanvas
+KGlobalData *-- KCanvasParamsBar
+KCanvas *-- KShape
+KCanvasParamsBar *-- KGlobalData
+KShapeFactory ..> KShape
+KMainWindow *-- KCanvasParamsBar
+KMainWindow *-- KCanvas
+
+@enduml

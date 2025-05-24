@@ -1,0 +1,19 @@
+@startuml
+' 图形模块
+package "Shape Module" {
+    class KShape {
+        +abstract drawShape(QPaintDevice*)
+        +abstract getShapeType(): KShapeType
+        +abstract clone(): KShape*
+    }
+
+    KPenLine --|> KShape
+    KLine --|> KShape
+    KRect --|> KShape
+    KCircle --|> KShape
+    KText --|> KShape
+    KPent --|> KShape
+    KHexa --|> KShape
+    KStar --|> KShape
+}
+@enduml

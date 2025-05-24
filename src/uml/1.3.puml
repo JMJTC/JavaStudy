@@ -1,0 +1,45 @@
+@startuml
+' 操作模块
+package "Operation Module" {
+    class Operation {
+        +abstract reverse(): Operation*
+        +abstract exec()
+        +abstract dump()
+    }
+
+    class OpAdd  {
+        +OpAdd(KShape*)
+        -KShape* m_pShape
+    }
+
+    OpAdd --|> Operation
+
+    class OpDel  {
+        +OpDel(KShape*)
+        -KShape* m_pShape
+    }
+
+    OpDel --|> Operation
+
+    class OpShapePara  {
+        +OpShapePara(KShape*, KShapeParaType, QVariant, QVariant)
+        -KShape* m_pShape
+        -QVariant m_oldVal, m_newVal
+    }
+
+    OpShapePara --|> Operation
+
+    class OpCanvasPara {
+        +OpCanvasPara(KCanvasParaType, QVariant, QVariant)
+        -QVariant m_oldVal, m_newVal
+    }
+
+    OpCanvasPara --|> Operation
+
+    KGlobalData *-- Operation : 使用
+    OpAdd *-- KShape : 操作
+    OpDel *-- KShape : 操作
+    OpShapePara *-- KShape : 操作
+    OpCanvasPara *-- KCanvas : 操作
+}
+@enduml

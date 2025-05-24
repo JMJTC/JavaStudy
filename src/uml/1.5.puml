@@ -1,0 +1,21 @@
+@startuml
+' 主窗口与工厂模块
+package "Main Window & Factory" {
+    class KMainWindow {
+        +initConnection()
+        -KSvgMainWindow* m_pSvgMainWin
+        -KCanvasParamsBar* m_pParamBar
+        -KToolBar* m_pToolBar
+    }
+
+    class KShapeFactory {
+        +static createShape(KGlobalData::KDrawFlag): KShape*
+        +static createShape(SvgManager::SvgElement): KShape*
+    }
+
+    KMainWindow *-- KSvgMainWindow : 包含
+    KMainWindow *-- KCanvasParamsBar : 包含
+    KMainWindow *-- KToolBar : 包含
+    KShapeFactory ..> KShape : 创建
+}
+@enduml

@@ -1,0 +1,56 @@
+@startuml
+' 核心框架模块
+package "Core Framework" {
+    class KGlobalData {
+        +enum KDrawFlag
+        +static getGlobalDataIntance(): KGlobalData*
+        +get/setDrawFlag(KDrawFlag)
+        +get/setCanvasWidth(int)
+        +get/setCanvasHeight(int)
+        +get/setCanvasColor(QString)
+        +get/setSelectedShape(KShape*)
+        +getCanvas(): KCanvas*
+        +getCanvasParamBar(): KCanvasParamsBar*
+        +push/popUndo/Redo(Operation*)
+        -QStack<Operation*> m_undoStack
+        -QStack<Operation*> m_redoStack
+        -static KGlobalData* s_pInstance
+    }
+
+    class KShape {
+        +abstract drawShape(QPaintDevice*)
+        +abstract getShapeType(): KShapeType
+        +abstract clone(): KShape*
+        +setStart/EndPoint(QPoint)
+        +drawOutLine(QPaintDevice*)
+        -QPoint m_startPoint
+        -QPoint m_endPoint
+        -QString m_shapeColor
+        -Qt::PenStyle m_shapeLineType
+    }
+
+    class KCanvas {
+        +paintEvent(QPaintEvent*)
+        +mousePress/Move/ReleaseEvent(QMouseEvent*)
+        +keyPressEvent(QKeyEvent*)
+        +get/setShapeList(QList<KShape*>)
+        +selectAll()
+        +copy/deleteSelected()
+        +paste()
+        -QList<KShape*> m_pShapeList
+        -QList<KShape*> m_pSelectedShapeList
+    }
+
+    class KCanvasParamsBar {
+        +KCanvasParamsBar(QString, QWidget*)
+        -KValueBox* m_pWidthBox
+        -KValueBox* m_pHeightBox
+        -KColorBox* m_pColorBox
+        -KShapeLineTypeBox* m_pShapeLineTypeBox
+    }
+
+    KGlobalData *-- KCanvas : 管理
+    KGlobalData *-- KCanvasParamsBar : 管理
+    KCanvas *-- KShape : 包含
+}
+@enduml
