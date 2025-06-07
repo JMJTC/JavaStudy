@@ -32,4 +32,19 @@ public class Problem16 {
         }
         return ans;
     }
+
+    // 方二：双指针
+    public int trap2(int[] height) {
+        int ans = 0;
+        int left = 0;
+        int right = height.length - 1;
+        int preMax = 0;
+        int sufMax = 0;
+        while (left < right) {
+            preMax = Math.max(preMax, height[left]);
+            sufMax = Math.max(sufMax, height[right]);
+            ans += preMax < sufMax ? preMax - height[left++] : sufMax - height[right--];
+        }
+        return ans;
+    }
 }
